@@ -23,17 +23,19 @@
   }
 
   &_btn {
-    max-width: 224px;
-    width: 100%;
-    background-color: $yellow;
-    color: $black;
-    text-transform: none;
-    font-size: 16px;
-    font-weight: 400;
-    box-shadow: none;
-    cursor: pointer;
-    &:hover {
+    &[class*='MuiButtonBase-root'] {
+      max-width: 224px;
+      width: 100%;
       background-color: $yellow;
+      color: $black;
+      text-transform: none;
+      font-size: 16px;
+      font-weight: 400;
+      box-shadow: none;
+      cursor: pointer;
+      &:hover {
+        background-color: $yellow;
+      }
     }
   }
 

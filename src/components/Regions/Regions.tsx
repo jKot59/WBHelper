@@ -1,13 +1,12 @@
 import { Button } from '@mui/material';
-import styles from './regions.module.scss';
-import { RootState } from '@/app/GlobalRedux/store';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { createSelector } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
+import { useEffect, useState } from 'react';
+import styles from './regions.module.scss';
 
 export function Regions() {
+  const [regionsList, setRegionsList] = useState<any>(null);
+
   async function getRegions() {
     const response = await axios.get(`http://back-wb-helper.ru/api/v1/wb/regions/`, {
       headers: {
@@ -15,19 +14,20 @@ export function Regions() {
         'Content-Type': 'application/json',
       },
     });
+    console.log('regions', response.data);
+    setRegionsList(response.data);
   }
 
   useEffect(() => {
-    console.log(getCookie('token'));
     getRegions();
   }, []);
 
   return (
     <div className={styles.container}>
-      {[].map((region: any) => {
+      {regionsList?.map((region: any) => {
         return (
           <Button key={region.id} className={styles.region_btn} variant='outlined'>
-            {/* {region.} */}
+            {region.name}
           </Button>
         );
       })}

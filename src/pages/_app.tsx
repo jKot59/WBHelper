@@ -9,15 +9,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Вызов функции initializeApp
     initializeApp()
       .then(() => {
-        // Устанавливаем флаг аутентификации в true
         setAuthenticated(true);
       })
       .catch((error) => {
         console.error('Ошибка при аутентификации:', error);
-        // Обработка ошибок
       });
   }, []);
 
@@ -26,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {authenticated && (
         <div className='container'>
           <Header />
-          <main>
+          <main className='main'>
             {authenticated}
             <Component {...pageProps} />
           </main>

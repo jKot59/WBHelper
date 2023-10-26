@@ -1,30 +1,63 @@
-import styles from './advertisment.module.scss';
+import { useEffect, useState } from 'react';
+import styles from './advertisement.module.scss';
+import axios from 'axios';
+import { getCookie } from 'cookies-next';
+import Image from 'next/image';
 
 export function Advertisement() {
-  // const { data, error, isLoading } = useGetAdvertisementQuery('a');
-  // console.log(data);
+  const [advertisementList, setAdvertisementList] = useState<any>(null);
 
-  // fetch('http://back-wb-helper.ru/api/v1/users/login/ ', {
-  //   method: 'POST', // Обычно для аутентификации используется POST метод
-  //   headers: new Headers({
-  //     'Content-Type': 'application/json',
-  //   }),
-  //   body: JSON.stringify({
-  // email: 'timamasharipov@gmail.com',
-  // password: '5YwLYPD85zPa0GX8Ws89',
-  //   }),
-  // })
-  //   .then((res) => res.json())
-  //   .then((res) => {
-  //     console.log(res);
-  //     fetch('http://back-wb-helper.ru/api/v1/wb/regions/', {
-  //       method: 'GET',
-  //       headers: new Headers({
-  //         //@ts-ignore
-  //         Authorization: 'Bearer ' + res.access,
-  //         'Content-Type': 'application/json',
-  //       }),
-  //     });
-  //   });
-  return <div className=''>Advertisement</div>;
+  async function getAdvertisement() {
+    const response = await axios.get(`http://back-wb-helper.ru/api/v1/wb/adverts/`, {
+      headers: {
+        Authorization: 'Bearer ' + getCookie('token'),
+        'Content-Type': 'application/json',
+      },
+      params: {
+        input: 'ручка',
+        type: '6',
+      },
+    });
+    console.log('adv', response.data);
+    setAdvertisementList(response.data.bets);
+  }
+
+  useEffect(() => {
+    getAdvertisement();
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      <table>
+        <thead>
+          <th>Место</th>
+          <th>Фото</th>
+          <th>Артикул</th>
+          <th>Позиция</th>
+          <th>Ставка</th>
+          <th>Категория</th>
+          <th>Доставка</th>
+        </thead>
+        <tbody>
+          {advertisementList?.map((adv: any) => {
+            return (
+              <tr key={adv.advert_id}>
+                <td>{adv.position}</td>
+                <td>
+                  <Image src={adv.image} alt='product image' width={50} height={65} />
+                </td>
+                <td>
+                  <a href={adv.url}>{adv.article}</a>
+                </td>
+                <td>{adv.position}</td>
+                <td>{adv.cmp}</td>
+                <td>{adv.advert_id}</td>
+                <td>{adv.delivery_time}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 }

@@ -1,15 +1,19 @@
 @import '@/styles/variables.scss';
 
 .container {
+  margin-bottom: 20px;
   display: flex;
   gap: 10px;
 }
 
-.region_btn,
-.region_btn:hover {
-  padding: 8px;
-  min-width: 115px;
-  border: 1px solid $grey;
-  background: transparent;
-  color: $black;
+.region_btn {
+  &[class*='MuiButtonBase-root'] {
+    padding: 8px 10px;
+    min-width: 115px;
+    border: 1px solid $grey;
+    background: transparent;
+    font-size: 11px;
+    font-weight: 400;
+    color: $black;
+  }
 }

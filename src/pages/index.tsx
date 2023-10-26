@@ -1,26 +1,22 @@
 import { Advertisement } from '@/components/Advertisement/Advertisement';
+import { CategoriesPriority } from '@/components/CategoriesPriority/CategoriesPriority';
 import { CurrentBets } from '@/components/CurrentBets/CurrentBets';
+import { InfoBlock } from '@/components/InfoBlock/InfoBlock';
 import { Regions } from '@/components/Regions/Regions';
-import { initializeApp } from '@/utils/initializeApp';
-import { useEffect } from 'react';
+import styles from './index.module.scss';
 
 export default function Home() {
-  // useEffect(() => {
-  //   login({
-  // email: 'timamasharipov@gmail.com',
-  // password: '5YwLYPD85zPa0GX8Ws89',
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   if (data?.access) localStorage.setItem('token', data.access);
-  // }, [data]);
-
   return (
     <section>
       <CurrentBets />
-      <Advertisement />
-      <Regions />
+      <div className={styles.content}>
+        <div>
+          <Regions />
+          <InfoBlock />
+          <Advertisement />
+        </div>
+        <CategoriesPriority />
+      </div>
     </section>
   );
 }
