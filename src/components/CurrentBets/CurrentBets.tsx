@@ -21,6 +21,7 @@ export function CurrentBets() {
           <InputBase
             className={styles.search_input}
             placeholder='Поиск по названию или артикулу'
+            value={'Ручки'}
             inputProps={{ 'aria-label': 'search google maps' }}
           />
           <IconButton type='button' sx={{ p: '10px' }} aria-label='search'>

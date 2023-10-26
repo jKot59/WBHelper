@@ -1,26 +1,12 @@
 import { Button } from '@mui/material';
+import styles from './regions.module.scss';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
-import { useEffect, useState } from 'react';
-import styles from './regions.module.scss';
+import useRegionsLogic from './useRegionsLogic';
 
-export function Regions() {
-  const [regionsList, setRegionsList] = useState<any>(null);
-
-  async function getRegions() {
-    const response = await axios.get(`http://back-wb-helper.ru/api/v1/wb/regions/`, {
-      headers: {
-        Authorization: 'Bearer ' + getCookie('token'),
-        'Content-Type': 'application/json',
-      },
-    });
-    console.log('regions', response.data);
-    setRegionsList(response.data);
-  }
-
-  useEffect(() => {
-    getRegions();
-  }, []);
+function Regions() {
+  const { regionsList } = useRegionsLogic();
 
   return (
     <div className={styles.container}>
@@ -34,3 +20,5 @@ export function Regions() {
     </div>
   );
 }
+
+export default Regions;

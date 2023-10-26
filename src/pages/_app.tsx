@@ -1,4 +1,3 @@
-import { ReduxProvider } from '@/app/GlobalRedux/ReduxProvider';
 import { Header } from '@/components/header/Header';
 import { AppProps } from 'next/app';
 import '@/styles/global.scss';
@@ -19,17 +18,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ReduxProvider>
+    <>
       {authenticated && (
         <div className='container'>
           <Header />
           <main className='main'>
-            {authenticated}
             <Component {...pageProps} />
           </main>
         </div>
       )}
-    </ReduxProvider>
+    </>
   );
 }
 
