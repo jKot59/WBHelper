@@ -1,0 +1,51 @@
+@import '@/styles/variables.scss';
+
+.container {
+  margin-bottom: 20px;
+  padding: 20px;
+  min-height: 133px;
+  background: $white;
+  border-radius: 20px;
+}
+
+.title {
+  margin-bottom: 10px;
+  min-height: 28px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.search {
+  &_panel {
+    display: flex;
+    gap: 20px;
+    height: 55px;
+  }
+
+  &_btn {
+    max-width: 224px;
+    width: 100%;
+    background-color: $yellow;
+    color: $black;
+    text-transform: none;
+    font-size: 16px;
+    font-weight: 400;
+    box-shadow: none;
+    cursor: pointer;
+    &:hover {
+      background-color: $yellow;
+    }
+  }
+
+  &_input {
+    margin-left: 10px;
+    flex: 1;
+    box-shadow: none;
+    &_wrapper {
+      padding: 2px 4px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
